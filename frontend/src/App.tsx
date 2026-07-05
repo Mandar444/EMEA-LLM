@@ -1356,11 +1356,12 @@ export default function App() {
               />
               <button
                 type="submit"
-                className="btn-primary"
+                className="send-arrow-button"
                 disabled={!systemStats?.model_loaded || isSending || !queryText.trim()}
-                style={{ borderRadius: "8px", padding: "0 20px" }}
+                aria-label="Send message"
+                title="Send message"
               >
-                Send
+                ↑
               </button>
             </form>
           </div>
