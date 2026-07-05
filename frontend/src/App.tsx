@@ -342,10 +342,10 @@ export default function App() {
   // Loading phase steps
   const [loadingPhase, setLoadingPhase] = useState<number>(0);
   const loadingPhases = [
-    "Analyzing query intent & checking spellings...",
-    "Scanning structural hierarchy (BM25 + Siamese Top-10 Chunks)...",
-    "Running sentence reranker & filtering semantic overlaps...",
-    "Synthesizing structured formatting and resolving contradictions..."
+    "Reading your question...",
+    "Checking the last 3 conversation turns...",
+    "Finding the most relevant cited chunks...",
+    "Assembling a concise answer..."
   ];
 
   // Streaming Text Simulation State
@@ -1052,8 +1052,8 @@ export default function App() {
                   <span style={{ fontSize: "44px" }}>🤖</span>
                   <h2 style={{ color: "white", fontSize: "19px", fontWeight: 600 }}>MySAF-T Offline Copilot</h2>
                   <p style={{ maxWidth: "480px", textAlign: "center", fontSize: "13.5px", lineHeight: "1.6" }}>
-                    Ask questions regarding system navigation, General Ledger, information auditing, or user permissions.
-                    Answers are parsed, reranked, and cited dynamically.
+                    Ask clear questions about the uploaded MySAF-T guide. Answers stay concise, preserve source citations,
+                    and use recent conversation context for follow-ups.
                   </p>
                   
                   {/* Copilot Suggestions Prompt Cards */}
@@ -1102,9 +1102,9 @@ export default function App() {
                   const displayedText = isStreaming ? (streamingTextMap[msg.id] || "") : msg.text;
 
                   // Parse primary source information retrieval type
-                  const retrievalType = msg.source?.contributing_sources 
-                    ? "Hybrid Reranked" 
-                    : (msg.confidence_score && msg.confidence_score > 0.8) ? "Siamese Semantic" : "BM25 Lexical";
+                  const retrievalType = msg.source?.contributing_sources
+                    ? "Cited Answer"
+                    : (msg.confidence_score && msg.confidence_score > 0.8) ? "High Confidence" : "Source Match";
 
                   return (
                     <div
@@ -1299,7 +1299,7 @@ export default function App() {
                       borderRadius: "50%",
                       animation: "spin 1s linear infinite"
                     }} />
-                    <span style={{ fontSize: "14px", fontWeight: 600, color: "white" }}>Inference Coordinator Processing...</span>
+                    <span style={{ fontSize: "14px", fontWeight: 600, color: "white" }}>Working on your answer...</span>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                     {loadingPhases.map((phase, idx) => (
@@ -1333,7 +1333,7 @@ export default function App() {
                 className="chat-input"
                 placeholder={
                   systemStats?.model_loaded
-                    ? "Type your question about MySAF-T... (Press Enter to send, Shift+Enter for new line)"
+                    ? "Ask about MySAF-T... Press Enter to send, Shift+Enter for a new line"
                     : "Active model is not loaded. Train your model in the Documents page first."
                 }
                 value={queryText}
@@ -1370,7 +1370,12 @@ export default function App() {
         {activeTab === "documents" && (
           <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div className="view-header" style={{ padding: "16px 24px" }}>
-              <div className="view-title" style={{ fontSize: "18px", color: "white", fontWeight: 600 }}>Document Ingestion Workspace</div>
+              <div>
+                <div className="view-title" style={{ fontSize: "18px", color: "white", fontWeight: 600 }}>Documents</div>
+                <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "2px" }}>
+                  Manage uploaded manuals and source files for the assistant.
+                </div>
+              </div>
               <div style={{ display: "flex", gap: "8px" }}>
                 <button
                   className="btn-primary"
@@ -1424,10 +1429,10 @@ export default function App() {
                 />
                 <span className="upload-icon" style={{ fontSize: "36px" }}>📤</span>
                 <span style={{ fontWeight: 600, color: "white" }}>
-                  {isUploading ? "Reading Paragraphs & Segmenting..." : "Drag & Drop Manual here or click to select"}
+                  {isUploading ? "Uploading and preparing chunks..." : "Drop a manual here or click to upload"}
                 </span>
                 <span style={{ fontSize: "12px", color: "var(--text-secondary)", maxWidth: "420px", lineHeight: "1.4" }}>
-                  Supported formats: PDF, DOCX, TXT, MD. Documents are segmented structure-aware at headings boundaries.
+                  Supported formats: PDF, DOCX, TXT, MD. Upload stores the source file and prepares it for the frozen retrieval pipeline.
                 </span>
               </div>
 
