@@ -909,11 +909,11 @@ export default function App() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: "100%",
-                  background: "rgba(0,0,0,0.15)",
+                  background: "#FFFFFF",
                   border: "1px solid var(--border-glass)",
                   borderRadius: "8px",
                   padding: "8px 12px 8px 30px",
-                  color: "white",
+                  color: "var(--text-primary)",
                   fontSize: "12.5px"
                 }}
               />
@@ -937,12 +937,12 @@ export default function App() {
                       padding: "8px 10px",
                       borderRadius: "6px",
                       cursor: "pointer",
-                      color: sessionId === s.id ? "white" : "var(--text-secondary)",
-                      background: sessionId === s.id ? "rgba(255,255,255,0.04)" : "transparent",
+                      color: sessionId === s.id ? "var(--color-primary)" : "var(--text-secondary)",
+                      background: sessionId === s.id ? "#F4F1FF" : "transparent",
                       fontSize: "12.5px",
                       marginBottom: "4px",
                       transition: "all 0.15s ease",
-                      border: sessionId === s.id ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent"
+                      border: sessionId === s.id ? "1px solid #DDD6FE" : "1px solid transparent"
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: "6px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flexGrow: 1 }}>
