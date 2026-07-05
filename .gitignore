@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+
+frontend/node_modules/
+frontend/dist/
+frontend/node_modules/.tmp/
+frontend/node_modules/.vite/
+frontend/node_modules/.vite-temp/
+
+storage/
+scratch/
+
+*.docx
+*.zip
+
+.env
+.env.*
