@@ -136,3 +136,7 @@ python -m backend.ml.evaluator
 ## 🛡️ License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+For anything Reach out to 
+Mandar Shinde : mandarshinde627@gmail.com
+
